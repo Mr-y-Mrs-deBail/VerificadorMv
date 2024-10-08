@@ -1,0 +1,665 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="style.css">
+    <title>Verificador MV</title>
+</head>
+<body>
+
+    <div class="container d-flex align-items-center justify-content-center vh-100">
+        <div class="text-center">
+            <h1 class="texto mb-4">Verificador <br> de Alimentos</h1>
+            <button class="consejo" id="consejoBtn">Un consejo para ti</button>
+            <button class="btnAlimentos" id="mostrarListado">Resumen del buscador</button>
+            <img src="img/chef.png" alt="chef" class="chef img-fluid mb-4">
+            <p class="texto2">¿Puedo o no comer este alimento?</p>
+            <input type="text" id="buscador" placeholder="Escribe aquí amor..." class="form-control mb-4">
+            <p id="mensaje">No puedes</p>
+            <button type="button" class="btn btn-regresar" onclick="window.location.href='//mr-y-mrs-debail.github.io/Dieta/'">
+                Regresar
+            </button>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    
+    <script>
+        const buscador = document.getElementById("buscador");
+        const mensaje = document.getElementById("mensaje");
+        
+        const palabrasClave = [
+            "pescado", "huevo", "lácteos", "berenjena",
+            "hamburguesa", "papas fritas y papa en general", "pollo", "carne asada",
+            "carnes rojas", "pan dulce", "pasteles",
+            "coliflor", "brócoli", "espinaca",
+            "ajo", "cebolla", "pimientos",
+            "manzana", "tomate", "pepino",
+            "fresa", "naranja", "plátano",
+            "piña", "mango", "kiwi",
+            "frijoles", "sandía", "melón",
+            "camarones", "quinoa", "avena",
+            "yogurt", "miel", "tofu",
+            "panqueques", "pan", "harina blanca",
+            "pan de molde", "chocolates", "fideos instantáneos ni fideos en general",
+            "galletas", "helado", "frutas en almíbar",
+            "pastas", "espaguetis", "arroz",
+            "banderillas", "comidas rápidas", "comidas fritas",
+            "mantequilla", "margarina", "aceite",
+            "zanahoria", "coca", "coca cola",
+            "azúcar", "queso", "manteca", "sándwich",
+            "MV", "Chocolatada", "leche",
+            "granola", "cereal", "cerveza",
+            "salchichas", "embutidos", "peperoni",
+            "pizza", "tortilla", "maíz",
+            "dulces", "hot dog", "donas",
+            "burritos", "tacos", "McDonalds",
+            "salsa dulce", "flan", "aderezos",
+            "mayonesa", "Bollos", "postres",
+            "barras de granola", "mantequilla de maní", "carne de res", 
+            "cordero", "toronja", "atol", "ranch",
+            "carne de cerdo", "snacks", "gatorade",
+            "amor", "te extraño", "uva", "te amo", "banano",
+            "señor", "cuánto me amas", "me extrañas",
+            "bebidas alcohólicas", "sal", "remolacha"
+        ];
+        
+        function normalizarTexto(texto) {
+            return texto.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
+        }
+        
+        let timeoutId;
+        
+        buscador.addEventListener("input", () => {
+            clearTimeout(timeoutId);
+            timeoutId = setTimeout(() => {
+                const texto = normalizarTexto(buscador.value);
+                const sugerencias = palabrasClave.filter(palabra => normalizarTexto(palabra).startsWith(texto));
+               // const sugerencias = palabrasClave.filter(palabra => normalizarTexto(palabra) === texto);
+
+                
+                
+                if (texto.trim() === "") {
+                    mensaje.style.display = "none"; 
+                } else if (sugerencias.length > 0) {
+                    mensaje.style.display = "block";
+                    mensaje.style.color = "white";
+                    
+                    const palabraClave = sugerencias[0];
+                    switch (palabraClave) {
+                        case "sal":
+                            mensaje.textContent = "Come poca sal.";
+                            break;
+                        case "pan de molde":
+                            mensaje.textContent = "Solamente puedes consumir 2 rodajas de pan integral al día mi amor.";
+                            break;
+                        case "sándwich":
+                            mensaje.textContent = "Solamente puedes consumir al día 2 rodajas de pan integral mi amor, puedes hacerte un sádwich con queso panela o con huevo amor o pollo, con lechuga y tomate uyyy.";
+                            break;
+                        case "remolacha":
+                            mensaje.textContent = "Come pero con moderación.";
+                            break;
+                        case "azúcar":
+                            mensaje.textContent = "Solamente consume el azúcar de las frutas amor, un poco de azúcar en tu limonada o licuados mi amor.";
+                            break; 
+                        case "carne asada":
+                            mensaje.textContent = "Se que te gusta mucho mi amor, pero por el momento no puedes comer nada de carne asada, ni carnes rojas (carne de cerdo, de vaca, cordero, etc). Te AmooOOOO.";
+                            break;
+                        case "pasteles":
+                            mensaje.textContent = "No puedes mi amor, pero cuando estemos juntos, Uyyy y ya estés sano, prometo hacerte muchos pasteles y postres súper ricos Uyyyy.";
+                            break;
+                        case "coliflor":
+                            mensaje.textContent = "Sí puedes mi amor, al vapor, en ensaladas Uyyy son muy sanas mi amor.";
+                            break;
+                        case "brócoli":
+                            mensaje.textContent = "Sí puedes mi amor, es súper sano y rico, puedes comerlo con huevo, pollo, en ensaladas, uyyyy, sé creativo con tu comidita mi amor.";
+                            break;
+                        case "espinaca":
+                            mensaje.textContent = "Si puedes comer mi amor, come muchas espinacas (deberías de comer todos los días espinacas mi amor), eso te ayuda mucho en un dieta y te ayuda con la presión mi amor.";
+                            break;
+                        case "ajo":
+                            mensaje.textContent = "Sí puedes mi amor";
+                            break;
+                        case "cebolla":
+                            mensaje.textContent = "Sí puedes mi súper esposo.";
+                            break;
+                        case "pimientos":
+                            mensaje.textContent = "Sí puedes mi amor (de todos los colores, amarillos, rojos, verdes). Te AmoooooOOOO!";
+                            break;
+                        case "manzana":
+                            mensaje.textContent = "Puedes comer de ambas (roja y verde) creo que hay amarillas no sé amor, pero mejor si consumes más la verde, ya que las demás son más dulces.";
+                            break;
+                        case "tomate":
+                            mensaje.textContent = "Puedes comer de todos los tomates que existen mi amor, el de manzano, cherry, normal, etc.";
+                            break;
+                        case "pepino":
+                            mensaje.textContent = "Uyyy puedes comer muchos pepinos mi amor, con limón y poquita sal, sin nada, en ensalada Uyyyy, come muchos pepinos mi amor.";
+                            break;
+                        case "fresa":
+                            mensaje.textContent = "Sí puedes mi amor, puedes comer cualquier fruta mi amor.";
+                            break;
+                        case "naranja":
+                            mensaje.textContent = "Uyyyy Claro que sí puedes mi amor, puedes hacerla en jugo, en ensaladas, etc.";
+                            break;
+                        case "plátano":
+                            mensaje.textContent = "Sí puedes mi amor, pero mejor si solamente los consumes cocidos (en agua) ya que el agua te ayuda a regular la presión mi amor.";
+                            break;
+                        case "kiwi":
+                            mensaje.textContent = "Sí puedes mi amor come muchos kiwis mi señor uvita.";
+                            break;
+                        case "mango":
+                            mensaje.textContent = "Sí puedes mi amor pero con moderación, en ensalada, solo así Uyyy (puedes comer mango verde, amarillo) cualquier mango mi amor.";
+                            break;
+                        case "piña":
+                            mensaje.textContent = "Uyyy si puedes mi amor, incluso para que aproveches toda la piña, puedes hacerte fresco con cáscara de piña y también te comes todo el fruto de la piña amor.";
+                            break;
+                        case "melón":
+                            mensaje.textContent = "Sí puedes mi amor, a mi no me gusta el melón pero puedes tomarlo en un licuado mi amor, licuado de piña, papaya y melón. Sabe súper rico mi amor así mi amor.";
+                            break;
+                        case "sandía":
+                            mensaje.textContent = "Come moderadamente ya que es dulce amor, pero sí puedes Uyyyy.";
+                            break;
+                        case "frijoles":
+                            mensaje.textContent = "Pues si puedes mi amor pero los de grano, no los de bolsita Uyyyy";
+                            break;
+                        case "quinoa":
+                            mensaje.textContent = "Sí puedes mi amor, cuando estemos juntos te voy a preparar la quinoa de varias formas, incluso como un snack para que llenes mi linda pancita.";
+                            break;
+                        case "avena":
+                            mensaje.textContent = "Sí puedes mi amor, puedes consumirla como snack la avena también o en tu desayuno o cena mi amor.";
+                            break;
+                        case "camarones":
+                            mensaje.textContent = "Sí puedes mi súper esposo, pero camarones fritos? come moderadamente mi amor!";
+                            break;
+                        case "tofu":
+                            mensaje.textContent = "Uyyy sí puedes mi amor, el tofu nunca lo he probado pero se ve rico.";
+                            break;
+                        case "miel":
+                            mensaje.textContent = "Sí puedes mi súper esposo, la miel puedes usarla en ocasiones como sustituto del azúcar mi amor.";
+                            break;
+                        case "yogurt":
+                            mensaje.textContent = "Uyyy claro que puedes pero solo el yogurt natural, agregale tus frutas favoritas uyyyyy e incluso agregale granola, uyyyy!";
+                            break;
+                        case "harina blanca":
+                            mensaje.textContent = "Por el momento nada de harinas mi amor, a menos que hagas harina de avena pero cuando este contigo te haré comiditas sanitas para tu linda pancita Uyyyy.";
+                            break;
+                        case "panqueques":
+                            mensaje.textContent = "No puedes mi amor, pero sí puedes hacer panqueques de banano con avena, puedes agregarle fresas, Uyyyy tambíen son súper ricos así.";
+                            break;
+                        case "banano":
+                            mensaje.textContent = "Come moderadamente mi amor, puedes prepararte panqueques de banano Uyyyy o fritas mi amor, cuando este contigo te las voy a preparar Uyyyyy.";
+                            break;
+                        case "chocolates":
+                            mensaje.textContent = "Solamente consume el chocolate negro sin azúcar y para hervir pues sí puedes pero de vez en cuando amor.";
+                            break;
+                        case "helado":
+                            mensaje.textContent = "No puedes, pero cuando este contigo te haré helado cacero súper rico uyyyy.";
+                            break;
+                        case "arroz":
+                            mensaje.textContent = "Por el momento no mi amor, hasta nuevo aviso Uyyyyy, o hasta que yo te lo prepare de una forma sana, cuando este contigo mi amor.";
+                            break;
+                        case "mantequilla":
+                            mensaje.textContent = "No puedes mi amor, ni de maní, ni salada, ni ninguna otra mantequilla mi amor.";
+                            break;
+                        case "coca":
+                            mensaje.textContent = "Nada de bebidas gaseosas mi amor, ni energéticas, ni hidratantes como el Gatorade.";
+                            break;
+                        case "cerveza":
+                            mensaje.textContent = "Nada de bebidas alcohólicas.";
+                            break;
+                        case "cereal":
+                            mensaje.textContent = "Por el momento no puedes mi amor.";
+                            break;
+                        case "salchichas":
+                            mensaje.textContent = "Por el momento no puedes, pero si quieres comer, entonces opta por salchichas de pavo o pollo.";
+                            break;
+                        case "embutidos":
+                            mensaje.textContent = "Los embutidos son como el jamón, salchichas, peperoni, salami, etc. No puedes pero lo que es el jamón y salchichas (si son de pavo o pollo) puedes comer pero con moderación mi amor.";
+                            break;
+                        case "tortilla":
+                            mensaje.textContent = "No puedes, pero si podrías comer tortillas de avena, pero cuando este contigo te haré una receta para ver si te gustan mi amor.";
+                            break;
+                        case "aderezos":
+                            mensaje.textContent = "No puedes mi amor, a menos que prepares un aderezo hecho por ti, por ejemplo: uno que lleva yogurt natural, limón, ajo, mostaza (opcional), aceite de oliva y perejil. Es rico amor y estaría hecho por ti mismo.";
+                            break;
+                        case "postres":
+                            mensaje.textContent = "Uyyyy para que quieres postre mi amor, ya me tienes de postre a mí Uyyyy, pero cuando este contigo te haré muchos postres ricos y sanos para ti mi amor, también puedes hacer postres con yogurt natural o avena mi amor. Pero insisto Yo puedo ser tu postre todos los días mi amor!";
+                            break;
+                        case "bollos":
+                            mensaje.textContent = "Depende de los ingredientes, si son sanos sí mi amor.";
+                            break;
+                        case "ranch":
+                            mensaje.textContent = "Come moderadamente mi amor.";
+                            break;
+                        case "atol":
+                            mensaje.textContent = "Por el momento mejor no mi amor, hasta nuevo aviso sisi.";
+                            break;
+                        case "MV":
+                            mensaje.textContent = "Estaremos juntos hasta pasitas mi amor, siempre te haré súper feliz mi amor (cada día te daré muchas sorpresas lindas) y verás que cuando estemos juntos no vamos a pelear sino que vamos a ser muy pero muy felices juntos Uyyyy! Te amooooOOOOOO con toda mi alma y corazón mi amor.";
+                            break;
+                        case "Señor":
+                            mensaje.textContent = "Recuerda que eres MI Señor de Melany y yo TU Señora de Victor Uyyyyy, TODO TÚ ERES MÍO POR SIEMPRE Y YO SOY SOLAMENTE TUYA POR SIEMPRE MI AMOR!, Te amoOOOOOOOOO.";
+                            break;
+                        case "huevo":
+                            mensaje.textContent = "Por el momento, mejor si los comes solamente duros mi amor. Dejas hervir el agua, cuando esté hirviendo, pones los huevos que te vayas a comer y, cuando pasen 12 minutos, los retiras del fuego. Los pones en agua fría, les quitas la cáscara y listo mi amor. Pero también puedes comer huevos en torta, omeletts con verduras amor y huevos estrellados estrellados, pero con poquito aceite de aguacate.";
+                            break;
+                        case "pescado":
+                            mensaje.textContent = "Puedes comer cualquier tipo de pescado, pero mejor si está preparado a la plancha y sin tanta sal amor.";
+                            break;
+                        case "queso":
+                            mensaje.textContent = "Solamente el recomendado para ti (como el queso panela).";
+                            break;
+                        case "amor":
+                            mensaje.textContent = "No puedes comer amor, pero yo si puedo darte amor y muchísimo amor hasta que seamos pasitas.";
+                            break;
+                        case "te extraño":
+                            mensaje.textContent = "Yo te extraño más a ti mi amor.";
+                            break;
+                        case "berenjena":
+                            mensaje.textContent = "Come moderadamente, mi amor, pero cuando esté contigo, te haré una lasaña de berenjena. ¡Uyyyy!";
+                            break;
+                        case "lácteos":
+                            mensaje.textContent = "Puedes consumir leche de almendras, queso panela y yogurt natural mi amor.";
+                            break;
+                        case "te amo":
+                            mensaje.textContent = "Yo te amo más que tú a mí, nunca lo olvides mi amor.";
+                            break;
+                        case "uva":
+                            mensaje.textContent = "Si puedes mi señor uvita.";
+                            break;
+                        case "pollo":
+                            mensaje.textContent = "Pollo frito no puedes amor, pero si puedes comer pollo a la planca, en sopa, cocido, pollo sano amor, sin exceso de aceite.";
+                            break;
+                        case "leche":
+                            mensaje.textContent = "Ningún lácteo no recomendado para ti amor.";
+                            break;
+                        case "aceite":
+                            mensaje.textContent = "No puedes consumir ningún aceite convencional, solamente consume el de aguacate o el de oliva amor.";
+                            break;
+                        case "cuánto me amas":
+                            mensaje.textContent = "Uyyy contando todo lo que hay en el mundo, toda la arena, las gotas del mar, de la lluvia, todas las uvas que existieron, que hay y que habrán en un futuro, todo multiplicalo por infinito. Te amooooOOO cada milisegundo más y más mi amor, después te digo que más tienes que contar mi amor.";
+                            break;
+                        case "granola":
+                            mensaje.textContent = "No todos los días (sino ya cuenta como chuche mi amor).";                            
+                            break;
+                        case "me extrañas":
+                            mensaje.textContent = "Con toda mi alma y corazón, me haces mucha falta mi amor.";
+                            break;
+                        case "Chocolatada":
+                            mensaje.textContent = "No puedes tomar chocolatada mi amor, mejor toma agua pura o una limonada Uyyyyy.";
+                            break;
+                        case "snacks":
+                            mensaje.textContent = "No consumas snacks con sal. Come apio, pepinos pequeños, zanahorias baby, nueces, almendras, pocas frutas (arándanos, fresas, papaya, etc.), pistachos, nueces de macadamia, almendras, avellanas, pecanas, recuerda siempre que Nunca deben de contener sal mi amor.";
+                            break;
+                        case "toronja":
+                            mensaje.textContent = "Consumela moderadamente y no todos los días.";
+                            break;
+                        case "zanahoria":
+                            mensaje.textContent = "come moderadamente.";
+                            break;
+                        case "dulces":
+                            mensaje.textContent = "NO, Solamente consume el azúcar de la fruta mi amor, además para que quieres dulces, si ya me tienes a mí, así que no necesitas más dulce en tu vida, (solamente a mí Uyyyyy).";
+                            break;
+                        default:
+                            mensaje.textContent = `No puedes comer ${palabraClave} amor.`;
+                        }
+                    } else {
+                        mensaje.style.display = "block";
+                        mensaje.style.color = "white";
+                        mensaje.textContent = "Ups, No encontre una sugerencia mi amor.";
+                    }
+            }, 500); 
+        });
+
+    </script>
+
+
+    <script>
+    
+        document.getElementById("mostrarListado").addEventListener("click", () => {
+            mostrarCategorias();
+        });
+        
+        function mostrarCategorias() {
+            const categorias = `
+            <button class="categoria-boton" onclick="mostrarVerduras()">Verduras</button><br>
+            <button class="categoria-boton" onclick="mostrarFrutas()">Frutas</button><br>
+            <button class="categoria-boton" onclick="mostrarProteinas()">Proteínas</button><br>
+            <button class="categoria-boton" onclick="mostrarLacteos()">Lácteos</button><br>
+            <button class="categoria-boton" onclick="mostrarComidasRapidas()">Comidas Rápidas</button><br>
+            <button class="categoria-boton" onclick="mostrarPostres()">Postres</button><br>
+            <button class="categoria-boton" onclick="mostrarAderezos()">Aderezos</button><br>
+            <button class="categoria-boton" onclick="mostrarBusquedaEspecial()">Búsqueda Especial</button>
+            `;
+            
+            Swal.fire({
+                title: 'Listado de Categorías',
+                html: categorias,
+                icon: 'info',
+                background: 'black',
+                color: 'white',
+                showConfirmButton: false,
+                showCancelButton: true,
+                cancelButtonText: 'Cerrar',
+                cancelButtonColor: 'coral',
+                allowOutsideClick: false,
+                allEscapeKey: false,
+                allEnterKey: false,
+                stopKeydownPropagation: false
+            });
+        }
+        
+        function mostrarVerduras() {
+            const verduras = `
+            Berenjena: Moderadamente<br>
+            Coliflor: Sí<br>
+            Brócoli: Sí<br>
+            Espinaca: Sí<br>
+            Ajo: Sí<br>
+            Cebolla: Sí<br>
+            Pimientos: Sí<br>
+            Zanahoria: Moderadamente
+            `;
+            
+            Swal.fire({
+                title: 'Verduras',
+                html: verduras,
+                icon: 'info',
+                background: 'black',
+                showCancelButton: true,
+                color: 'white',
+                confirmButtonText: 'Siguiente',
+                cancelButtonText: 'Cerrar',
+                cancelButtonColor: 'coral',
+                allowOutsideClick: false,
+                allEscapeKey: false,
+                allEnterKey: false,
+                stopKeydownPropagation: false
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    mostrarFrutas();
+                }
+            });
+        }
+        
+        function mostrarFrutas() {
+            const frutas = `
+            Manzana: Sí<br>
+            Tomate: Sí<br>
+            Pepino: Sí<br>
+            Fresa: Sí<br>
+            Naranja: Sí<br>
+            Plátano: Sí<br>
+            Piña: Sí<br>
+            Mango: Moderadamente<br>
+            Kiwi: Sí<br>
+            Sandía: Moderadamente<br>
+            Melón: Sí<br>
+            Uva: Sí<br>
+            Toronja: Sí
+            `;
+            
+            Swal.fire({
+                title: 'Frutas',
+                html: frutas,
+                icon: 'info',
+                background: 'black',
+                showCancelButton: true,
+                color: 'white',
+                confirmButtonText: 'Siguiente',
+                cancelButtonText: 'Cerrar',
+                cancelButtonColor: 'coral',
+                allowOutsideClick: false,
+                allEscapeKey: false,
+                allEnterKey: false,
+                stopKeydownPropagation: false
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    mostrarProteinas();
+                }
+            });
+        }
+        
+        function mostrarProteinas() {
+            const proteinas = `
+            Pescado: Sí<br>
+            Huevo: Sí<br>
+            Pollo: Sí<br>
+            Carne asada: No<br>
+            Carnes rojas: No<br>
+            Camarones: Moderadamente<br>
+            Tofu: Sí<br>
+            Frijoles: Moderadamente<br>
+            Quinoa: Sí<br>
+            Avena: Sí
+            `;
+            
+            Swal.fire({
+                title: 'Proteínas',
+                html: proteinas,
+                icon: 'info',
+                background: 'black',
+                showCancelButton: true,
+                color: 'white',
+                confirmButtonText: 'Siguiente',
+                cancelButtonText: 'Cerrar',
+                cancelButtonColor: 'coral',
+                allowOutsideClick: false,
+                allEscapeKey: false,
+                allEnterKey: false,
+                stopKeydownPropagation: false
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    mostrarLacteos();
+                }
+            });
+        }
+        
+        function mostrarLacteos() {
+            const lacteos = `
+            Lácteos: Algunos<br>
+            Yogurt: Natural<br>
+            Queso: Panela<br>
+            Leche: Almendras
+            `;
+            
+            Swal.fire({
+                title: 'Lácteos',
+                html: lacteos,
+                icon: 'info',
+                background: 'black',
+                showCancelButton: true,
+                color: 'white',
+                confirmButtonText: 'Siguiente',
+                cancelButtonText: 'Cerrar',
+                cancelButtonColor: 'coral',
+                allowOutsideClick: false,
+                allEscapeKey: false,
+                allEnterKey: false,
+                stopKeydownPropagation: false
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    mostrarComidasRapidas();
+                }
+            });
+        }
+        
+        function mostrarComidasRapidas() {
+            const comidasRapidas = `
+            Hamburguesa: No<br>
+            Papas fritas y papa en general: No<br>
+            Comidas rápidas: No<br>
+            Comidas fritas: No<br>
+            McDonalds: No<br>
+            Hot dog: No<br>
+            Burritos: No<br>
+            Tacos: No<br>
+            Pizza: No
+            `;
+            
+            Swal.fire({
+                title: 'Comidas Rápidas',
+                html: comidasRapidas,
+                icon: 'info',
+                background: 'black',
+                showCancelButton: true,
+                color: 'white',
+                confirmButtonText: 'Siguiente',
+                cancelButtonText: 'Cerrar',
+                cancelButtonColor: 'coral',
+                allowOutsideClick: false,
+                allEscapeKey: false,
+                allEnterKey: false,
+                stopKeydownPropagation: false
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    mostrarPostres();
+                }
+            });
+        }
+        
+        function mostrarPostres() {
+            const postres = `
+            Pan dulce: No<br>
+            Pasteles: No<br>
+            Galletas: No<br>
+            Helado: No<br>
+            Frutas en almíbar: No<br>
+            Panqueques: No<br>
+            Chocolates: No<br>
+            Bollos: No<br>
+            Postres: No
+            `;
+            
+            Swal.fire({
+                title: 'Postres',
+                html: postres,
+                icon: 'info',
+                background: 'black',
+                showCancelButton: true,
+                color: 'white',
+                confirmButtonText: 'Siguiente',
+                cancelButtonText: 'Cerrar',
+                cancelButtonColor: 'coral',
+                allowOutsideClick: false,
+                allEscapeKey: false,
+                allEnterKey: false,
+                stopKeydownPropagation: false
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    mostrarAderezos();
+                }
+            });
+        }
+        
+        function mostrarAderezos() {
+            const aderezos = `
+            Aderezos: Hechos por ti<br>
+            Mayonesa: No<br>
+            Salsa dulce: No <br>
+            Ranch: Moderadamente
+            `;
+            
+            Swal.fire({
+                title: 'Aderezos',
+                html: aderezos,
+                icon: 'info',
+                background: 'black',
+                showCancelButton: true,
+                color: 'white',
+                confirmButtonText: 'Siguiente',
+                cancelButtonText: 'Cerrar',
+                cancelButtonColor: 'coral',
+                allowOutsideClick: false,
+                allEscapeKey: false,
+                allEnterKey: false,
+                stopKeydownPropagation: false
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    mostrarBusquedaEspecial();
+                }
+            });
+        }
+        
+        function mostrarBusquedaEspecial() {
+            const busquedaEspecial = `
+            Busca estas palabras especiales en el buscador mi amor: <br>
+            Amor <br>
+            Te extraño <br>
+            Te amo <br>
+            Señor <br>
+            Cuánto me amas <br>
+            Me extrañas
+            `;
+            
+            Swal.fire({
+                title: 'Búsqueda Especial',
+                html: busquedaEspecial,
+                icon: 'info',
+                confirmButtonText: 'Volver al listado',
+                background: 'black',
+                color: 'white',
+                showCancelButton: true,
+                cancelButtonColor: 'coral',
+                cancelButtonText: 'Cerrar',
+                allowOutsideClick: false,
+                allEscapeKey: false,
+                allEnterKey: false,
+                stopKeydownPropagation: false
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    mostrarCategorias();
+                }
+            });
+        }
+    </script>
+
+    <script>
+
+        const consejos = [
+            { texto: "No tomes tanta agua antes de ir a dormir mi amor.", imagen: "img/emergencia.jpg" },
+            { texto: "Come frutas antes de las 4:00 PM.", imagen: "img/fruta.jpg" },
+            { texto: "Duerme siempre bien, mi amor!", imagen: "img/dormir.jpg" },
+            { texto: "No te estreses mi súper esposo.", imagen: "img/estres.jpg" },
+            { texto: "Disminuye el consumo de azúcar mi amor, pero puedes seguir consumiendola.", imagen: "img/dulce.jpg" },
+            { texto: "No comas en exceso las frutas ni la granola mi amor, sino ya serían chuches amor.", imagen: "img/granola.jpg" },
+            { texto: "Toma mucha agua pura, mi amor!", imagen: "img/agua.jpg" },
+            { texto: "Puedes endulzar con miel tus licuados de frutas.", imagen: "img/miel.jpg" },
+            { texto: "Come mucha papaya para la buena digestión mi amor.", imagen: "img/papaya.jpg" },
+            { texto: "Sustituye el café por un jugo verde mi todo, todito, todo, todote.", imagen: "img/jugoVerde.jpg" },
+            { texto: "El verde es bueno, así que toma muchos jugos verdes y también licuados de frutas amor, ensaladas, muchas hojitas verdes mi amor.", imagen: "img/verde.jpg" },
+            { texto: "Te amOOOOOo con toda mi alma y corazón. Muy pronto estaré contigo para cuidarte y mejorar tu salud mi súper esposo, pero mientras tanto cuídate muchísimo por mí por favor mi amor.", imagen: "img/juntos.jpg" }
+        ];
+
+        let consejoIndex = 0;
+
+        document.getElementById('consejoBtn').addEventListener('click', () => {
+            mostrarConsejo();
+        });
+
+        function mostrarConsejo() {
+            const consejo = consejos[consejoIndex];
+            Swal.fire({
+                text: consejo.texto,
+                imageUrl: consejo.imagen,
+                imageWidth: 300,
+                imageHeight: 300,
+                imageAlt: 'Consejo',
+                cancelButtonText: 'Siguiente',
+                confirmButtonText: 'Cerrar',
+                showCancelButton: true,
+            }).then((result) => {
+                if (result.dismiss === Swal.DismissReason.cancel) {
+                    consejoIndex = (consejoIndex + 1) % consejos.length;
+                    mostrarConsejo();
+                }
+            });
+        }
+    </script>
+
+    </script>
+    
+</body>
+</html>
