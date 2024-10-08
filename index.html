@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -18,7 +18,7 @@
             <p class="texto2">¿Puedo o no comer este alimento?</p>
             <input type="text" id="buscador" placeholder="Escribe aquí amor..." class="form-control mb-4">
             <p id="mensaje">No puedes</p>
-            <button type="button" class="btn btn-regresar" onclick="window.location.href='//mr-y-mrs-debail.github.io/Dieta/'">
+            <button type="button" class="btn btn-regresar" onclick="mostrarAlertaVolver()">
                 Regresar
             </button>
         </div>
@@ -63,7 +63,7 @@
             "carne de cerdo", "snacks", "gatorade",
             "amor", "te extraño", "uva", "te amo", "banano",
             "señor", "cuánto me amas", "me extrañas",
-            "bebidas alcohólicas", "sal", "remolacha"
+            "bebidas alcohólicas", "sal", "remolacha", "Solo", "Siempre"
         ];
         
         function normalizarTexto(texto) {
@@ -100,6 +100,12 @@
                             break;
                         case "remolacha":
                             mensaje.textContent = "Come pero con moderación.";
+                            break;
+                        case "Solo":
+                            mensaje.textContent = "Nunca mi amor, siempre estaré contigo hasta ser pasitas, así que nunca vuelvas a pensar en algo así, pero si lo vuelves a pensar, regresa a leer esto: TE AMOOOOOOOOOOOO con toda mi alma y corazón y nunca te dejaré solo, para mí tú eres lo mejor de mi vida y siempre estaré contigo en las buenas, malas, en las tristezas y felicidad, siempre voy a cuidar de ti mi amor, Te amoOOOO te amOOOOooo te amOOOOOO, te súper amOOOOOOOOOOOO!.";
+                            break;
+                        case "Siempre":
+                            mensaje.textContent = "Siempre seré tuya, solamente tuya, siempre estaré a tu lado, siempre te amaré cada milisegundo más y más, siempre serás mi súper esposo y siempre me va a gustar todo de ti, porque todo de ti me encanta mi amor.";
                             break;
                         case "azúcar":
                             mensaje.textContent = "Solamente consume el azúcar de las frutas amor, un poco de azúcar en tu limonada o licuados mi amor.";
@@ -337,9 +343,10 @@
             Swal.fire({
                 title: 'Listado de Categorías',
                 html: categorias,
-                icon: 'info',
-                background: 'black',
-                color: 'white',
+                color: 'black',
+                imageUrl: 'img/lista.jpg',
+                imageWidth: 200,
+                imageHeight: 200,
                 showConfirmButton: false,
                 showCancelButton: true,
                 cancelButtonText: 'Cerrar',
@@ -360,16 +367,18 @@
             Ajo: Sí<br>
             Cebolla: Sí<br>
             Pimientos: Sí<br>
-            Zanahoria: Moderadamente
+            Zanahoria: Moderadamente <br>
+            Puedes comer cualquier vegetal y verdura mi amor
             `;
             
             Swal.fire({
                 title: 'Verduras',
                 html: verduras,
-                icon: 'info',
-                background: 'black',
                 showCancelButton: true,
-                color: 'white',
+                color: 'black',
+                imageUrl: 'img/zanahoria.jpg',
+                imageWidth: 200,
+                imageHeight: 200,
                 confirmButtonText: 'Siguiente',
                 cancelButtonText: 'Cerrar',
                 cancelButtonColor: 'coral',
@@ -390,6 +399,7 @@
             Tomate: Sí<br>
             Pepino: Sí<br>
             Fresa: Sí<br>
+            Banano: Moderadamente<br>
             Naranja: Sí<br>
             Plátano: Sí<br>
             Piña: Sí<br>
@@ -398,16 +408,18 @@
             Sandía: Moderadamente<br>
             Melón: Sí<br>
             Uva: Sí<br>
-            Toronja: Sí
+            Toronja: Sí<br>
+            Puedes comer todas las frutas mi amor
             `;
             
             Swal.fire({
                 title: 'Frutas',
                 html: frutas,
-                icon: 'info',
-                background: 'black',
                 showCancelButton: true,
-                color: 'white',
+                color: 'black',
+                imageUrl: 'img/uva.png',
+                imageWidth: 200,
+                imageHeight: 200,
                 confirmButtonText: 'Siguiente',
                 cancelButtonText: 'Cerrar',
                 cancelButtonColor: 'coral',
@@ -433,16 +445,18 @@
             Tofu: Sí<br>
             Frijoles: Moderadamente<br>
             Quinoa: Sí<br>
-            Avena: Sí
+            Avena: Sí<br>
+            Lo que no este en la lista, puedes preguntarme mi amor
             `;
             
             Swal.fire({
                 title: 'Proteínas',
                 html: proteinas,
-                icon: 'info',
-                background: 'black',
                 showCancelButton: true,
-                color: 'white',
+                color: 'black',
+                imageUrl: 'img/love.png',
+                imageWidth: 200,
+                imageHeight: 200,
                 confirmButtonText: 'Siguiente',
                 cancelButtonText: 'Cerrar',
                 cancelButtonColor: 'coral',
@@ -462,16 +476,19 @@
             Lácteos: Algunos<br>
             Yogurt: Natural<br>
             Queso: Panela<br>
-            Leche: Almendras
+            Leche: Almendras<br>
+            Chocolatadas: No<br>
+            Otros tipos de queso: Moderadamente
             `;
             
             Swal.fire({
                 title: 'Lácteos',
                 html: lacteos,
-                icon: 'info',
-                background: 'black',
                 showCancelButton: true,
-                color: 'white',
+                color: 'black',
+                imageUrl: 'img/TúyYo.jpg',
+                imageWidth: 250,
+                imageHeight: 200,
                 confirmButtonText: 'Siguiente',
                 cancelButtonText: 'Cerrar',
                 cancelButtonColor: 'coral',
@@ -496,16 +513,18 @@
             Hot dog: No<br>
             Burritos: No<br>
             Tacos: No<br>
-            Pizza: No
+            Pizza: No<br>
+            A todas las comidas rápidas: NO
             `;
             
             Swal.fire({
                 title: 'Comidas Rápidas',
                 html: comidasRapidas,
-                icon: 'info',
-                background: 'black',
                 showCancelButton: true,
-                color: 'white',
+                color: 'black',
+                imageUrl: 'img/hamburguesa.jpg',
+                imageWidth: 200,
+                imageHeight: 200,
                 confirmButtonText: 'Siguiente',
                 cancelButtonText: 'Cerrar',
                 cancelButtonColor: 'coral',
@@ -530,16 +549,18 @@
             Panqueques: No<br>
             Chocolates: No<br>
             Bollos: No<br>
-            Postres: No
+            Postres: No<br>
+            Postres sanos sí puedes mi amor, pero cuando este contigo te voy a preparar muchos postres sanos sisi.
             `;
             
             Swal.fire({
                 title: 'Postres',
                 html: postres,
-                icon: 'info',
-                background: 'black',
                 showCancelButton: true,
-                color: 'white',
+                color: 'black',
+                imageUrl: 'img/postre.jpg',
+                imageWidth: 200,
+                imageHeight: 200,
                 confirmButtonText: 'Siguiente',
                 cancelButtonText: 'Cerrar',
                 cancelButtonColor: 'coral',
@@ -565,10 +586,11 @@
             Swal.fire({
                 title: 'Aderezos',
                 html: aderezos,
-                icon: 'info',
-                background: 'black',
                 showCancelButton: true,
-                color: 'white',
+                color: 'black',
+                imageUrl: 'img/aderezos.jpg',
+                imageWidth: 200,
+                imageHeight: 200,
                 confirmButtonText: 'Siguiente',
                 cancelButtonText: 'Cerrar',
                 cancelButtonColor: 'coral',
@@ -591,16 +613,19 @@
             Te amo <br>
             Señor <br>
             Cuánto me amas <br>
-            Me extrañas
+            Me extrañas <br>
+            Solo <br>
+            Siempre
             `;
             
             Swal.fire({
                 title: 'Búsqueda Especial',
                 html: busquedaEspecial,
-                icon: 'info',
                 confirmButtonText: 'Volver al listado',
-                background: 'black',
-                color: 'white',
+                color: 'black',
+                imageUrl: 'img/especial.jpg',
+                imageWidth: 200,
+                imageHeight: 200,
                 showCancelButton: true,
                 cancelButtonColor: 'coral',
                 cancelButtonText: 'Cerrar',
@@ -625,11 +650,11 @@
             { texto: "No te estreses mi súper esposo.", imagen: "img/estres.jpg" },
             { texto: "Disminuye el consumo de azúcar mi amor, pero puedes seguir consumiendola.", imagen: "img/dulce.jpg" },
             { texto: "No comas en exceso las frutas ni la granola mi amor, sino ya serían chuches amor.", imagen: "img/granola.jpg" },
-            { texto: "Toma mucha agua pura, mi amor!", imagen: "img/agua.jpg" },
+            { texto: "Toma mucha agua pura, mi amor!", imagen: "img/agua.png" },
             { texto: "Puedes endulzar con miel tus licuados de frutas.", imagen: "img/miel.jpg" },
             { texto: "Come mucha papaya para la buena digestión mi amor.", imagen: "img/papaya.jpg" },
             { texto: "Sustituye el café por un jugo verde mi todo, todito, todo, todote.", imagen: "img/jugoVerde.jpg" },
-            { texto: "El verde es bueno, así que toma muchos jugos verdes y también licuados de frutas amor, ensaladas, muchas hojitas verdes mi amor.", imagen: "img/verde.jpg" },
+            { texto: "El verde es bueno, así que toma muchos jugos verdes y también licuados de frutas amor, ensaladas y muchas hojitas verdes mi amor.", imagen: "img/verde.jpg" },
             { texto: "Te amOOOOOo con toda mi alma y corazón. Muy pronto estaré contigo para cuidarte y mejorar tu salud mi súper esposo, pero mientras tanto cuídate muchísimo por mí por favor mi amor.", imagen: "img/juntos.jpg" }
         ];
 
@@ -648,6 +673,10 @@
                 imageHeight: 300,
                 imageAlt: 'Consejo',
                 cancelButtonText: 'Siguiente',
+                allowOutsideClick: false,
+                allEscapeKey: false,
+                allEnterKey: false,
+                stopKeydownPropagation: false,
                 confirmButtonText: 'Cerrar',
                 showCancelButton: true,
             }).then((result) => {
@@ -658,7 +687,51 @@
             });
         }
     </script>
-
+    
+    <script>
+        function mostrarAlertaVolver() {
+            Swal.fire({
+                title: 'Ya te vas mi amor?',
+                imageUrl: 'img/pochacco.png',
+                background: 'black',
+                color: 'white',
+                imageAlt: 'pochacco',
+                imageWidth: 200,
+                imageHeight: 200,
+                confirmButtonText: 'Sí',
+                confirmButtonColor: 'skyblue',
+                allowOutsideClick: false,
+                allEscapeKey: false,
+                allEnterKey: false,
+                stopKeydownPropagation: false,
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    mostrarSegundaAlerta();
+                }
+            });
+        }
+        
+        function mostrarSegundaAlerta() {
+            Swal.fire({
+                title: 'Esta bien mi amor...',
+                background: 'black',
+                text: 'Regresa pronto, Te amooooOOOOOOO!',
+                imageUrl: 'img/salir.png',
+                imageWidth: 250,
+                imageHeight: 240,
+                imageAlt: 'salir',
+                confirmButtonColor: 'orange',
+                allowOutsideClick: false,
+                allEscapeKey: false,
+                allEnterKey: false,
+                stopKeydownPropagation: false,
+                confirmButtonText: 'Regresar'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    window.location.href = '//mr-y-mrs-debail.github.io/Dieta/';
+                }
+            });
+        }
     </script>
     
 </body>

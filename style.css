@@ -75,9 +75,13 @@ input[type="text"] {
 .categoria-boton {
     background: none;
     border: none;
-    color: white;
+    color: black;
     text-decoration: none;
     cursor: pointer;
+}
+
+.categoria-boton:hover {
+    background: pink;
 }
 
 
