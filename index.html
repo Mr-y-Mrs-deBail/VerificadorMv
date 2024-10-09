@@ -18,11 +18,15 @@
             <p class="texto2">¿Puedo o no comer este alimento?</p>
             <input type="text" id="buscador" placeholder="Escribe aquí amor..." class="form-control mb-4">
             <p id="mensaje">No puedes</p>
+            <button type="button" class="btn btn-sugerencia" id="sugerenciaBtn">
+                Falta algún alimento?
+            </button>
             <button type="button" class="btn btn-regresar" onclick="mostrarAlertaVolver()">
                 Regresar
             </button>
         </div>
     </div>
+
 
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     
@@ -31,39 +35,41 @@
         const mensaje = document.getElementById("mensaje");
         
         const palabrasClave = [
-            "pescado", "huevo", "lácteos", "berenjena",
-            "hamburguesa", "papas fritas y papa en general", "pollo", "carne asada",
+            "pescados", "huevos", "lácteos", "berenjenas",
+            "hamburguesas", "papas fritas y papa en general", "pollos", "carne asada",
             "carnes rojas", "pan dulce", "pasteles",
-            "coliflor", "brócoli", "espinaca",
-            "ajo", "cebolla", "pimientos",
-            "manzana", "tomate", "pepino",
-            "fresa", "naranja", "plátano",
-            "piña", "mango", "kiwi",
-            "frijoles", "sandía", "melón",
+            "coliflor", "brócoli", "espinacas",
+            "ajos", "cebollas", "pimientos",
+            "manzanas", "tomates", "pepinos",
+            "fresas", "naranjas", "plátanos",
+            "piñas", "mangos", "kiwis", "leche",
+            "frijoles", "sandias", "melón",
             "camarones", "quinoa", "avena",
             "yogurt", "miel", "tofu",
             "panqueques", "pan", "harina blanca",
             "pan de molde", "chocolates", "fideos instantáneos ni fideos en general",
-            "galletas", "helado", "frutas en almíbar",
+            "galletas", "helados", "frutas en almíbar",
             "pastas", "espaguetis", "arroz",
             "banderillas", "comidas rápidas", "comidas fritas",
-            "mantequilla", "margarina", "aceite",
-            "zanahoria", "coca", "coca cola",
-            "azúcar", "queso", "manteca", "sándwich",
-            "MV", "Chocolatada", "leche",
-            "granola", "cereal", "cerveza",
+            "mantequilla", "margarina", "aceites",
+            "zanahorias", "coca", "coca cola",
+            "azúcar", "quesos", "manteca", "sándwich",
+            "MV", "Chocolatada", "barbacoas",
+            "granola", "cereales", "cervezas",
             "salchichas", "embutidos", "peperoni",
-            "pizza", "tortilla", "maíz",
+            "pizza", "tortillas", "maíz",
             "dulces", "hot dog", "donas",
             "burritos", "tacos", "McDonalds",
             "salsa dulce", "flan", "aderezos",
             "mayonesa", "Bollos", "postres",
             "barras de granola", "mantequilla de maní", "carne de res", 
-            "cordero", "toronja", "atol", "ranch",
+            "cordero", "toronjas", "atol", "ranch",
             "carne de cerdo", "snacks", "gatorade",
-            "amor", "te extraño", "uva", "te amo", "banano",
+            "amor", "te extraño", "uva", "te amo", "bananos",
             "señor", "cuánto me amas", "me extrañas",
-            "bebidas alcohólicas", "sal", "remolacha", "Solo", "Siempre"
+            "bebidas alcohólicas", "sal", "remolachas", "Solo", "Siempre",
+            "caldos", "horchata", "ceviches", "enchiladas", "tamales", "quesadillas",
+            "empanadas", "chiles", "pepian", "chilaquiles"
         ];
         
         function normalizarTexto(texto) {
@@ -98,8 +104,41 @@
                         case "sándwich":
                             mensaje.textContent = "Solamente puedes consumir al día 2 rodajas de pan integral mi amor, puedes hacerte un sádwich con queso panela o con huevo amor o pollo, con lechuga y tomate uyyy.";
                             break;
-                        case "remolacha":
+                        case "remolachas":
                             mensaje.textContent = "Come pero con moderación.";
+                            break;
+                        case "caldos":
+                            mensaje.textContent = "Caldos de res no puedes amor, de pollo sí, de pata sí, de menudos sí. de pescado sí, caldos de hojitas sí (como de chipilín).";
+                            break;
+                        case "horchata":
+                            mensaje.textContent = "Sí puedes amor, puedes tomar cualquier fresco natural, con poca azúcar estaría mejor, pero frescos como toki o algo así No puedes mi amor.";
+                            break;
+                        case "ceviches":
+                            mensaje.textContent = "Sí puedes mi amor, todo lo que son mariscos sí puedes (solamente el pescado fríto comelo con moderación).";
+                            break;
+                        case "enchiladas":
+                            mensaje.textContent = "Las enchiladas guatemaltecas sí puedes, las mexicanas Mmm por el momento no amor.";
+                            break;
+                        case "barbacoas":
+                            mensaje.textContent = "No puedes amor, o solo un poco pero solamente pollo en barbacoa, lo que son costillas o carne de res en barbacoa no puedes amor.";
+                            break;
+                        case "tamales":
+                            mensaje.textContent = "No mi amor, ni tamalitos de chipílin, ni de elote, ni chuchitos, ni ningún otro ya que llevan maíz.";
+                            break;
+                        case "quesadilla":
+                            mensaje.textContent = "No puedes mi amor.";
+                            break;
+                        case "empanadas":
+                            mensaje.textContent = "No puedes mi amor.";
+                            break;
+                        case "chiles":
+                            mensaje.textContent = "Chile para tu comida no puedes mi amor, pero chiles rellenos guatemaltecos Sí puedes pero con moderación.";
+                            break;
+                        case "pepian":
+                            mensaje.textContent = "Con moderación y solamente el que esta preparado con pollo o gallina nada más.";
+                            break;
+                        case "chilaquiles":
+                            mensaje.textContent = "Chilaquiles guatemaltecos Sí puedes pero los que estan preparados con güisquil y los chilaquiles mexicanos no puedes mi amor.";
                             break;
                         case "Solo":
                             mensaje.textContent = "Nunca mi amor, siempre estaré contigo hasta ser pasitas, así que nunca vuelvas a pensar en algo así, pero si lo vuelves a pensar, regresa a leer esto: TE AMOOOOOOOOOOOO con toda mi alma y corazón y nunca te dejaré solo, para mí tú eres lo mejor de mi vida y siempre estaré contigo en las buenas, malas, en las tristezas y felicidad, siempre voy a cuidar de ti mi amor, Te amoOOOO te amOOOOooo te amOOOOOO, te súper amOOOOOOOOOOOO!.";
@@ -122,49 +161,52 @@
                         case "brócoli":
                             mensaje.textContent = "Sí puedes mi amor, es súper sano y rico, puedes comerlo con huevo, pollo, en ensaladas, uyyyy, sé creativo con tu comidita mi amor.";
                             break;
-                        case "espinaca":
+                        case "espinacas":
                             mensaje.textContent = "Si puedes comer mi amor, come muchas espinacas (deberías de comer todos los días espinacas mi amor), eso te ayuda mucho en un dieta y te ayuda con la presión mi amor.";
                             break;
-                        case "ajo":
+                        case "ajos":
                             mensaje.textContent = "Sí puedes mi amor";
                             break;
-                        case "cebolla":
+                        case "cebollas":
                             mensaje.textContent = "Sí puedes mi súper esposo.";
+                            break;
+                        case "tacos":
+                            mensaje.textContent = "No puedes mi súper esposo, come algo más saludable.";
                             break;
                         case "pimientos":
                             mensaje.textContent = "Sí puedes mi amor (de todos los colores, amarillos, rojos, verdes). Te AmoooooOOOO!";
                             break;
-                        case "manzana":
+                        case "manzanas":
                             mensaje.textContent = "Puedes comer de ambas (roja y verde) creo que hay amarillas no sé amor, pero mejor si consumes más la verde, ya que las demás son más dulces.";
                             break;
-                        case "tomate":
+                        case "tomates":
                             mensaje.textContent = "Puedes comer de todos los tomates que existen mi amor, el de manzano, cherry, normal, etc.";
                             break;
-                        case "pepino":
+                        case "pepinos":
                             mensaje.textContent = "Uyyy puedes comer muchos pepinos mi amor, con limón y poquita sal, sin nada, en ensalada Uyyyy, come muchos pepinos mi amor.";
                             break;
-                        case "fresa":
+                        case "fresas":
                             mensaje.textContent = "Sí puedes mi amor, puedes comer cualquier fruta mi amor.";
                             break;
-                        case "naranja":
+                        case "naranjas":
                             mensaje.textContent = "Uyyyy Claro que sí puedes mi amor, puedes hacerla en jugo, en ensaladas, etc.";
                             break;
-                        case "plátano":
+                        case "plátanos":
                             mensaje.textContent = "Sí puedes mi amor, pero mejor si solamente los consumes cocidos (en agua) ya que el agua te ayuda a regular la presión mi amor.";
                             break;
-                        case "kiwi":
+                        case "kiwis":
                             mensaje.textContent = "Sí puedes mi amor come muchos kiwis mi señor uvita.";
                             break;
-                        case "mango":
+                        case "mangos":
                             mensaje.textContent = "Sí puedes mi amor pero con moderación, en ensalada, solo así Uyyy (puedes comer mango verde, amarillo) cualquier mango mi amor.";
                             break;
-                        case "piña":
+                        case "piñas":
                             mensaje.textContent = "Uyyy si puedes mi amor, incluso para que aproveches toda la piña, puedes hacerte fresco con cáscara de piña y también te comes todo el fruto de la piña amor.";
                             break;
                         case "melón":
                             mensaje.textContent = "Sí puedes mi amor, a mi no me gusta el melón pero puedes tomarlo en un licuado mi amor, licuado de piña, papaya y melón. Sabe súper rico mi amor así mi amor.";
                             break;
-                        case "sandía":
+                        case "sandias":
                             mensaje.textContent = "Come moderadamente ya que es dulce amor, pero sí puedes Uyyyy.";
                             break;
                         case "frijoles":
@@ -194,13 +236,13 @@
                         case "panqueques":
                             mensaje.textContent = "No puedes mi amor, pero sí puedes hacer panqueques de banano con avena, puedes agregarle fresas, Uyyyy tambíen son súper ricos así.";
                             break;
-                        case "banano":
+                        case "bananos":
                             mensaje.textContent = "Come moderadamente mi amor, puedes prepararte panqueques de banano Uyyyy o fritas mi amor, cuando este contigo te las voy a preparar Uyyyyy.";
                             break;
                         case "chocolates":
                             mensaje.textContent = "Solamente consume el chocolate negro sin azúcar y para hervir pues sí puedes pero de vez en cuando amor.";
                             break;
-                        case "helado":
+                        case "helados":
                             mensaje.textContent = "No puedes, pero cuando este contigo te haré helado cacero súper rico uyyyy.";
                             break;
                         case "arroz":
@@ -212,10 +254,10 @@
                         case "coca":
                             mensaje.textContent = "Nada de bebidas gaseosas mi amor, ni energéticas, ni hidratantes como el Gatorade.";
                             break;
-                        case "cerveza":
+                        case "cervezas":
                             mensaje.textContent = "Nada de bebidas alcohólicas.";
                             break;
-                        case "cereal":
+                        case "cereales":
                             mensaje.textContent = "Por el momento no puedes mi amor.";
                             break;
                         case "salchichas":
@@ -224,7 +266,7 @@
                         case "embutidos":
                             mensaje.textContent = "Los embutidos son como el jamón, salchichas, peperoni, salami, etc. No puedes pero lo que es el jamón y salchichas (si son de pavo o pollo) puedes comer pero con moderación mi amor.";
                             break;
-                        case "tortilla":
+                        case "tortillas":
                             mensaje.textContent = "No puedes, pero si podrías comer tortillas de avena, pero cuando este contigo te haré una receta para ver si te gustan mi amor.";
                             break;
                         case "aderezos":
@@ -248,13 +290,13 @@
                         case "Señor":
                             mensaje.textContent = "Recuerda que eres MI Señor de Melany y yo TU Señora de Victor Uyyyyy, TODO TÚ ERES MÍO POR SIEMPRE Y YO SOY SOLAMENTE TUYA POR SIEMPRE MI AMOR!, Te amoOOOOOOOOO.";
                             break;
-                        case "huevo":
+                        case "huevos":
                             mensaje.textContent = "Por el momento, mejor si los comes solamente duros mi amor. Dejas hervir el agua, cuando esté hirviendo, pones los huevos que te vayas a comer y, cuando pasen 12 minutos, los retiras del fuego. Los pones en agua fría, les quitas la cáscara y listo mi amor. Pero también puedes comer huevos en torta, omeletts con verduras amor y huevos estrellados estrellados, pero con poquito aceite de aguacate.";
                             break;
-                        case "pescado":
+                        case "pescados":
                             mensaje.textContent = "Puedes comer cualquier tipo de pescado, pero mejor si está preparado a la plancha y sin tanta sal amor.";
                             break;
-                        case "queso":
+                        case "quesos":
                             mensaje.textContent = "Solamente el recomendado para ti (como el queso panela).";
                             break;
                         case "amor":
@@ -263,7 +305,7 @@
                         case "te extraño":
                             mensaje.textContent = "Yo te extraño más a ti mi amor.";
                             break;
-                        case "berenjena":
+                        case "berenjenas":
                             mensaje.textContent = "Come moderadamente, mi amor, pero cuando esté contigo, te haré una lasaña de berenjena. ¡Uyyyy!";
                             break;
                         case "lácteos":
@@ -275,13 +317,13 @@
                         case "uva":
                             mensaje.textContent = "Si puedes mi señor uvita.";
                             break;
-                        case "pollo":
+                        case "pollos":
                             mensaje.textContent = "Pollo frito no puedes amor, pero si puedes comer pollo a la planca, en sopa, cocido, pollo sano amor, sin exceso de aceite.";
                             break;
                         case "leche":
                             mensaje.textContent = "Ningún lácteo no recomendado para ti amor.";
                             break;
-                        case "aceite":
+                        case "aceites":
                             mensaje.textContent = "No puedes consumir ningún aceite convencional, solamente consume el de aguacate o el de oliva amor.";
                             break;
                         case "cuánto me amas":
@@ -299,10 +341,10 @@
                         case "snacks":
                             mensaje.textContent = "No consumas snacks con sal. Come apio, pepinos pequeños, zanahorias baby, nueces, almendras, pocas frutas (arándanos, fresas, papaya, etc.), pistachos, nueces de macadamia, almendras, avellanas, pecanas, recuerda siempre que Nunca deben de contener sal mi amor.";
                             break;
-                        case "toronja":
+                        case "toronjas":
                             mensaje.textContent = "Consumela moderadamente y no todos los días.";
                             break;
-                        case "zanahoria":
+                        case "zanahorias":
                             mensaje.textContent = "come moderadamente.";
                             break;
                         case "dulces":
@@ -333,7 +375,7 @@
             <button class="categoria-boton" onclick="mostrarVerduras()">Verduras</button><br>
             <button class="categoria-boton" onclick="mostrarFrutas()">Frutas</button><br>
             <button class="categoria-boton" onclick="mostrarProteinas()">Proteínas</button><br>
-            <button class="categoria-boton" onclick="mostrarLacteos()">Lácteos</button><br>
+            <button class="categoria-boton" onclick="mostrarLacteos()">Lácteos/Bebidas</button><br>
             <button class="categoria-boton" onclick="mostrarComidasRapidas()">Comidas Rápidas</button><br>
             <button class="categoria-boton" onclick="mostrarPostres()">Postres</button><br>
             <button class="categoria-boton" onclick="mostrarAderezos()">Aderezos</button><br>
@@ -446,6 +488,15 @@
             Frijoles: Moderadamente<br>
             Quinoa: Sí<br>
             Avena: Sí<br>
+            Caldos: solamente de res No.<br>
+            Ceviche: Sí<br>
+            Mariscos: Sí<br>
+            Enchiladas: Guatemaltecas Sí / Mexicanas No<br>
+            Chilaquiles: Guatemaltecos Sí / Mexicanos No<br>
+            Pepian: Solamente de pollo o gallina<br>
+            Chiles: Rellenos (poco), chiles para agregar a tu comida No<br>
+            Tamales: No<br>
+            Tamalitos: No<br>
             Lo que no este en la lista, puedes preguntarme mi amor
             `;
             
@@ -478,11 +529,16 @@
             Queso: Panela<br>
             Leche: Almendras<br>
             Chocolatadas: No<br>
+            Horchata: Sí<br>
+            Frescos Naturales: Sí<br>
+            Frescos de sobres: No<br>
+            Gaseosas: No<br>
+            Bebidas alcohólicas: NO<br>
             Otros tipos de queso: Moderadamente
             `;
             
             Swal.fire({
-                title: 'Lácteos',
+                title: 'Lácteos/Bebidas',
                 html: lacteos,
                 showCancelButton: true,
                 color: 'black',
@@ -514,6 +570,8 @@
             Burritos: No<br>
             Tacos: No<br>
             Pizza: No<br>
+            Empanadas: No<br>
+            Quesadillas: No<br>
             A todas las comidas rápidas: NO
             `;
             
@@ -580,6 +638,7 @@
             Aderezos: Hechos por ti<br>
             Mayonesa: No<br>
             Salsa dulce: No <br>
+            Barbacoas: Solamente pollo en barbacoa<br>
             Ranch: Moderadamente
             `;
             
@@ -732,6 +791,54 @@
                 }
             });
         }
+    </script>
+
+    <script>
+    
+        document.getElementById('sugerenciaBtn').addEventListener('click', function() {
+            Swal.fire({
+                title: 'Dime que alimento falta mi amor',
+                input: 'textarea',
+                inputPlaceholder: 'Escribe aquí mi vida...',
+                imageUrl: 'img/sugerencia.png',
+                imageWidth: 200,
+                imageHeight: 200,
+                imageAlt: 'sugerencia',
+                allowOutsideClick: false,
+                allEscapeKey: false,
+                allEnterKey: false,
+                stopKeydownPropagation: false,
+                showCancelButton: true,
+                confirmButtonText: 'Enviar',
+                cancelButtonText: 'Cancelar',
+                cancelButtonColor: 'coral',
+                preConfirm: (mensaje) => {
+                    if (!mensaje) {
+                        Swal.showValidationMessage('Ups, aún no has escrito nada mi amor!');
+                    } else {
+                        return fetch('https://formspree.io/f/xkgnwabn', {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json'
+                            },
+                            body: JSON.stringify({ message: mensaje })
+                        }).then(response => {
+                            if (!response.ok) {
+                                throw new Error(response.statusText);
+                            }
+                            return response.json();
+                        }).catch(error => {
+                            Swal.showValidationMessage(`Error: ${error}`);
+                        });
+                    }
+                }
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    Swal.fire('¡Uyyy el mensaje fue enviado!', 'Tu linda sugerencia o alimento que faltaba ha sido entregado con éxito mi súper esposo. <br> Te amOOOOOOooooooo mi todo, todito, todo, todote!', 'success');
+                }
+            });
+        });
+
     </script>
     
 </body>
