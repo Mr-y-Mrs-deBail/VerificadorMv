@@ -10,6 +10,7 @@ body {
     font-family: "Titan One", sans-serif;
     color: white;
     text-shadow: -5px 3px 0px purple;
+    margin-top: 120px;
 }
 
 .consejo {
@@ -104,5 +105,8 @@ input[type="text"] {
 @media (min-width: 768px) {
     .chef {
         width: 20%;
+    }
+    .texto {
+        margin-top: -90px;
     }
 }
